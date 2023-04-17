@@ -1,0 +1,32 @@
+{
+    "name": "fridris/invoice-pl",
+    "description": "Faktury pl",
+    "type": "library",
+    "require": {
+        "php": "^7.2 || ^8.0",
+        "barryvdh/laravel-dompdf": "2.0.x-dev",
+        "illuminate/support": "^6|^7|^8|^9|^10"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Fridris\\Invoice\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "fridris",
+            "email": "fridris@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fridris\\Invoice\\InvoiceServiceProvider"
+            ],
+            "aliases": {
+                "Invoice": "Fridris\\Invoice\\Facade\\InvoiceFacade"
+            }
+        }
+    }
+}
