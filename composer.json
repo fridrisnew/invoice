@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": "^7.2 || ^8.0",
-        "barryvdh/laravel-dompdf": "2.0.x-dev",
+        "barryvdh/laravel-dompdf": "2.x.x",
         "illuminate/support": "^6|^7|^8|^9|^10"
     },
     "license": "MIT",
