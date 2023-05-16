@@ -13,4 +13,5 @@ class InvoiceItem extends InvoiceData
     public string $taxPercentage;
     public string $totalTaxAmount;
     public string $totalAmount;
+    public string $description;
 }

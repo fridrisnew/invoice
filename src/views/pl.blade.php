@@ -187,7 +187,7 @@ table.signs {
             <td class="text-right"><b>Razem</b><br />Total</td>
             <td class="text-right">{{($totalNetAmount) ?? '' }}</td>
             <td></td>
-            <td class="text-right">{{($totalNetAmount) ?? '' }}</td>
+            <td class="text-right">{{($totalTaxAmount) ?? '' }}</td>
             <td class="text-right"><b>{{($totalAmount) ?? '' }}</b></td>
         </tr>
     </tbody>

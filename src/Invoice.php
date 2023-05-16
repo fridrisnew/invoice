@@ -88,7 +88,7 @@ class Invoice
         if (!\Arr::has($this->details, 'items') && count($this->details) <= 0) {
             $this->errors[] = 'items';
         }
-
+        $this->_calcTotal();
         //items
         foreach ($itemsRequired as $k => $r) {
             foreach ($this->details['items'] as $itemId => $item) {
@@ -116,13 +116,28 @@ class Invoice
 
     private function _calcTotal()
     {
+        $totalNetAmount = 0;
+        $totalAmount = 0;
+        $totalTaxAmount = 0;
         /**
          * @var $item InvoiceItem
          */
-        foreach ($this->details['items'] as $item) {
-            $item->quantity;
+        foreach ($this->details['items'] as $k=>$item) {
+            $totalNetAmount += $item['quantity'] * $item['totalNetAmount'];
+            $totalAmount += $item['quantity'] * $item['totalAmount'];
+            $totalTaxAmount += $item['quantity'] * $item['totalTaxAmount'];
+            $this->details['items'][$k]['totalAmount'] = self::priceFormat($item['totalAmount']);
         }
+        $this->details['totalNetAmount'] = self::priceFormat($totalNetAmount);
+        $this->details['totalAmount'] = self::priceFormat($totalAmount);
+        $this->details['totalTaxAmount'] = self::priceFormat($totalTaxAmount);
+        //dd($this->details);
+
     }
 
 
+    public static function priceFormat($price)
+    {
+        return number_format((double)$price , 2, '.', '');
+    }
 }
