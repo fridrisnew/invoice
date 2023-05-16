@@ -40,6 +40,8 @@
             $invdet->items[] = $item;
         }
         $invdet->bankIban = $faker->iban();
-        $invdet->logo = resource_path().(DIRECTORY_SEPARATOR.'photo'.DIRECTORY_SEPARATOR.'logo_mini_new.png');
+        $invdet->logo = "https://picsum.photos/200/100";
+        //$invdet->logo = resource_path().(DIRECTORY_SEPARATOR.'photo'.DIRECTORY_SEPARATOR.'logo_mini_new.png');
+
         return Invoice::create($invdet)->getStream();
     });

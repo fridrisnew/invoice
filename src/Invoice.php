@@ -67,8 +67,19 @@ class Invoice
         $itemsRequired = [];
 
         if (\Arr::has($this->details, 'logo')) {
-            if (file_exists($this->details['logo'])) {
-                $this->details['logo'] = $this->_imageTobase64($this->details['logo']);
+            if(self::is_url($this->details['logo'])){
+                //download image
+                $context = stream_context_create(
+                    array(
+                        "http" => array(
+                            "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
+                        )
+                    )
+                );
+                $img =  file_get_contents($this->details['logo'], false, $context);
+                $this->details['logo'] = $this->_imageTobase64($img);
+            } elseif (file_exists($this->details['logo'])) {
+                $this->details['logo'] = $this->_imageTobase64(file_get_contents($this->details['logo']));
             } else {
                 $this->errors[] = 'logo';
             }
@@ -102,9 +113,13 @@ class Invoice
         return !(count($this->errors) > 0);
     }
 
-    private function _imageTobase64($file_path)
+/*    private function _fileTobase64($file_path)
     {
         return "data:image/png;base64," . base64_encode(file_get_contents($file_path));
+    }*/
+    private function _imageTobase64($image)
+    {
+        return "data:image/png;base64," . base64_encode($image);
     }
 
     public function getStream()
@@ -139,5 +154,10 @@ class Invoice
     public static function priceFormat($price)
     {
         return number_format((double)$price , 2, '.', '');
+    }
+
+    public static function is_url($s)
+    {
+        return (filter_var($s, FILTER_VALIDATE_URL)) ;
     }
 }
