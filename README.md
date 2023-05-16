@@ -9,11 +9,11 @@
     Route::get('/test', function (Faker $faker) {
         $invdet = new \Fridris\Invoice\Dto\InvoiceDetails();
         $invdet->seller->NIP = '90998909809';
-        $invdet->seller->companyName = 'Ufystmes';
-        $invdet->seller->address->city = "Mława";
+        $invdet->seller->companyName = 'Comapny 1';
+        $invdet->seller->address->city = "Warszawa";
         $invdet->seller->address->postCode = "09-123";
         $invdet->seller->address->street = "Wysoka 23";
-        $invdet->seller->extra->Email = 'bok@e-geodeta.com';
+        $invdet->seller->extra->Email = 'test@test.pl';
         $invdet->seller->extra->Phone = '791990824';
     
         $invdet->buyer->NIP = '123123123';
@@ -21,7 +21,7 @@
         $invdet->buyer->address->city = "Sopot";
         $invdet->buyer->address->postCode = "01-123";
         $invdet->buyer->address->street = "Niska 32";
-        $invdet->buyer->extra->Email = 'bok@gmail.com';
+        $invdet->buyer->extra->Email = 'testowa@test.pl';
         $invdet->buyer->extra->Phone = '791990822';
         $invdet->paymentMethod = 'Bramka Płatnicza';
     
